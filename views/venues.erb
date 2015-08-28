@@ -1,0 +1,31 @@
+<h1> Venues </h1>
+
+<form action="/venues" method="post">
+  <label for="venues">Venue</label>
+  <input type="text" name="venues" id="venues"placeholder="ex:The Silver Dollar!">
+  <button type="submit" class="btn btn-danger">Submit</button>
+</form>
+
+
+<% if @venues == [] %>
+
+  <p>Please add a venue.</p>
+
+<% else %>
+
+<ul>
+  <% @venues.each() do |venue| %>
+
+  <li><a href="/venue/<%= venue.id() %>"><%= venue.name() %></a>
+  <form id="form_id" action="/venues" method="post">
+    <input type="hidden" name="venue_id" value="<%= venue.id() %>">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-danger">Yer gone</button>
+  </form>
+  </li>
+
+  <% end %>
+
+</ul>
+
+<% end %>

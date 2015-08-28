@@ -1,0 +1,32 @@
+<h1> Bands </h1>
+
+<form action="/bands" method="post">
+  <label for="band">Band</label>
+  <input type="text" name="band" id="band"placeholder="ex:Langhorn Slim">
+  <button type="submit" class="btn btn-danger">Submit</button>
+</form>
+
+<% if @bands == [] %>
+
+  <p> Please add an band </p>
+
+<% else %>
+
+
+<ul>
+
+  <% @bands.each() do |band|  %>
+
+  <li><a href="/band/<%= band.id()%>"><%= band.name() %></a>
+    <form id="form_id" action="/bands" method="post">
+      <input type="hidden" name="band_id" value="<%= band.id() %>">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger">yer gone</button>
+    </form>
+  </li>
+
+  <% end %>
+
+</ul>
+
+<% end %>

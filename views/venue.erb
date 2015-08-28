@@ -1,0 +1,37 @@
+<h2><%= @venue.name() %></h2>
+
+
+
+<form id="band" action="/venue/<%= @venue.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="venue_id" id="venue_id" value="<%= @venue.id() %>">
+    <label for="band">Band</label>
+    <input type="text" name="band" id="band" placeholder="ex: Langhorn Slim">
+    <button name="submit" class="btn btn-danger">Add</button>
+  </div>
+</form>
+<form class="form-inline" action="/venue/<%= @venue.id() %>" method="post">
+  <div class="form-group">
+    <input type="hidden" name="venue_id" value="<%= @venue.id() %>">
+    <input type="hidden" name="_method" value="patch">
+    <label for="venue">Update venue</label>
+    <input type="text" name="venue" id="venue" placeholer="<%= @venue.name() %>">
+    <button type="submit" class="btn btn-danger">Update</button>
+  </div>
+</form>
+
+
+<% if @venue.bands.any?() %>
+  <h3>Band List</h3>
+
+  <ul>
+    <% @venue.bands.each() do |venue_band| %>
+    <li> <%= venue_band.name() %> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+  <p>Please add bands.</p>
+
+<% end %>
